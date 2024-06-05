@@ -1,4 +1,4 @@
-https://github.com/karthi7010/Influxdb_basic_struct.gitfrom fastapi import FastAPI
+from fastapi import FastAPI
 
 from connect import influxdb_handler
 from crud.influx import write
