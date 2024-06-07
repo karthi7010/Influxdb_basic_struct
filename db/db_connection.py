@@ -1,4 +1,4 @@
-from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 class InfluxDBHandler:
@@ -8,8 +8,7 @@ class InfluxDBHandler:
         self.org = org
         self.bucket = bucket
 
-    def insert_data(self, measurement, tags, fields):
-        point = Point(measurement).tag(**tags).field(**fields)
+    def insert_data(self, point):
         self.write_api.write(self.bucket, self.org, point)
 
     def retrieve_data(self, query):
@@ -17,7 +16,6 @@ class InfluxDBHandler:
         result = query_api.query(query, org=self.org)
         return result
 
-# Initialize InfluxDBHandler
 influxdb_handler = InfluxDBHandler(
     url="http://localhost:8086",
     token="fCnHWK6yPm-SPoz0P_Waq8IBkfxUmBcx3AdD4gxexZVmwyfo8_FRPpTWET4Q5nWBJjEf_KOihgIAk_nrxEx02g==",
